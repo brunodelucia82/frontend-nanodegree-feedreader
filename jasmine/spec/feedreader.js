@@ -49,18 +49,80 @@ $(function() {
 
 
     /* TODO: Write a new test suite named "The menu" */
-
+    describe('The menu', function() {
+        const myMenu = document.querySelector('div.slide-menu');
+        let style = window.getComputedStyle(myMenu);
+        let matrix = function() {
+            return new WebKitCSSMatrix(style.webkitTransform);
+        };
+        let hiddenLeft = function() { 
+            return (matrix().m41 + myMenu.offsetWidth) <= 0;
+        };
+        let hiddenRight = function() { 
+            return (matrix().m41) >= window.innerWidth;
+        };
+        let hidden = function() {
+            return hiddenLeft() || hiddenRight() || (style.opacity === 0) || 
+                (style.visibility === 'hidden') || (style.display === 'none');
+            };
+        let formerlyHidden;
+        let afterClick1, afterClick2;
+                    
+        /*
+         * Store in the variable formerlyHidden the menu's hidden status
+         * before running any test
+         */
+        beforeEach(function (done) {
+            formerlyHidden = hidden();
+            
+            clickTwice(function() {
+                done();
+            });
+        });
+        
+        /*
+         * Triggers click on the menu icon twice, recording each time the 
+         * menu's visibility in a different boolean variable. Callback 
+         * function added in order to be used in the beforeEach()
+         */
+        function clickTwice(cb) {
+            const menuIcon = document.querySelector('.menu-icon-link');
+            menuIcon.click();
+            setTimeout(function() {
+                afterClick1 = hidden();
+                menuIcon.click();
+                setTimeout(function() {
+                    afterClick2 = hidden();
+                    if(cb) {
+                        cb();
+                    };
+                }, 201);
+            }, 201);
+        }
+        
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+        it('is hidden by default', function() {
+            expect(formerlyHidden).toBe(true);
+        });
+         
+        /* TODO: Write a test that ensures the menu changes
+         * visibility when the menu icon is clicked. This test
+         * should have two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
+        it('changes visibility when clicked', function(done) {
+            expect(afterClick1).toBe(!formerlyHidden);
+            expect(afterClick2).toBe(!afterClick1);
+            done();
+        });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+    });
+
+        
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
