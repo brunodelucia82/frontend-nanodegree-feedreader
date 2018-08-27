@@ -72,7 +72,7 @@ $(function() {
          * Store in the variable formerlyHidden the menu's hidden status
          * before running any test
          */
-        beforeEach(function (done) {
+        beforeAll(function (done) {
             formerlyHidden = hidden();
             
             clickTwice(function() {
