@@ -26,7 +26,6 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
@@ -35,7 +34,6 @@ $(function() {
             allFeeds.forEach(feed => expect(feed.url).toBeDefined()); 
             allFeeds.forEach(feed => expect(feed.url.length).toBeGreaterThan(0)); 
          });
-
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
@@ -47,9 +45,9 @@ $(function() {
          });
     });
 
-
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function() {
+        
         const myMenu = document.querySelector('div.slide-menu');
         let style = window.getComputedStyle(myMenu);
         let matrix = function() {
