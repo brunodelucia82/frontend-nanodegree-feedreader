@@ -139,12 +139,10 @@ $(function() {
     describe('New Feed Selection', function() {
         let oldContent, newContent;
         beforeEach(function(done) {
-            oldContent = document.querySelector('div.feed').innerHTML; // feed content
-                    // currently being displayed on the page (i.e. allFeeds[0])
-
-            // loading the second feed on the page
-            loadFeed(1, function() {
-               done();
+            loadFeed(0, function() {
+                // loading the first feed on the page
+                oldContent = document.querySelector('div.feed').innerHTML;
+                loadFeed(1, done); // loading the second feed on the page
             });
         });
         
