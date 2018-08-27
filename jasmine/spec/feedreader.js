@@ -80,23 +80,24 @@ $(function() {
         });
         
         /*
-         * Triggers click on the menu icon twice, recording each time the 
-         * body's 'class' attribute in a different variable. Callback 
-         * function added in order to be used in the beforeAll()
+         * Triggers click on the menu icon twice, recording each time in a 
+         * different variable whether the body's 'class' attribute contains 
+         * 'menu-hidden'. Callback function added in order to be used in 
+         * the beforeAll()
          */
         function clickTwice(cb) {
             const menuIcon = document.querySelector('.menu-icon-link');
             menuIcon.click();
             setTimeout(function() {
-                afterClick1 = document.querySelector('body').className;
+                afterClick1 = document.querySelector('body').classList.contains('menu-hidden');
                 menuIcon.click();
                 setTimeout(function() {
-                    afterClick2 = document.querySelector('body').className;
+                    afterClick2 = document.querySelector('body').classList.contains('menu-hidden');
                     if(cb) {
                         cb();
                     };
-                }, 201);
-            }, 201);
+                }, 1000);
+            }, 1000);
         }
         
         /* 
@@ -110,8 +111,8 @@ $(function() {
          * Test that ensures the menu changes visibility when the menu icon is clicked
          */
         it('changes visibility when clicked', function(done) {
-            expect(afterClick1).toBe('');
-            expect(afterClick2).toBe('menu-hidden');
+            expect(afterClick1).toBe(false);
+            expect(afterClick2).toBe(true);
             done();
         });
 
