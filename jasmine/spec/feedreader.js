@@ -30,16 +30,20 @@ $(function() {
          * and ensures it has a URL defined and that the URL is not empty
          */
          it('have a non-empty URL', function() {
-            allFeeds.forEach(feed => expect(feed.url).toBeDefined()); 
-            allFeeds.forEach(feed => expect(feed.url.length).toBeGreaterThan(0)); 
+            allFeeds.forEach(feed => { 
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).toBeGreaterThan(0);
+            }); 
          });
 
         /* Test that loops through each feed in the allFeeds object
          * and ensures it has a name defined and that the name is not empty
          */
          it('have a non-empty name', function() {
-            allFeeds.forEach(feed => expect(feed.name).toBeDefined()); 
-            allFeeds.forEach(feed => expect(feed.name.length).toBeGreaterThan(0)); 
+            allFeeds.forEach(feed => {
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).toBeGreaterThan(0);
+            }); 
          });
     });
 
