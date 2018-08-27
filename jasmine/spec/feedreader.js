@@ -80,17 +80,17 @@ $(function() {
         
         /*
          * Triggers click on the menu icon twice, recording each time the 
-         * menu's visibility in a different boolean variable. Callback 
-         * function added in order to be used in the beforeEach()
+         * body's 'class' attribute in a different variable. Callback 
+         * function added in order to be used in the beforeAll()
          */
         function clickTwice(cb) {
             const menuIcon = document.querySelector('.menu-icon-link');
             menuIcon.click();
             setTimeout(function() {
-                afterClick1 = hidden();
+                afterClick1 = document.querySelector('body').className;
                 menuIcon.click();
                 setTimeout(function() {
-                    afterClick2 = hidden();
+                    afterClick2 = document.querySelector('body').className;
                     if(cb) {
                         cb();
                     };
@@ -113,8 +113,8 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
         it('changes visibility when clicked', function(done) {
-            expect(afterClick1).toBe(!formerlyHidden);
-            expect(afterClick2).toBe(!afterClick1);
+            expect(afterClick1).toBe('');
+            expect(afterClick2).toBe('menu-hidden');
             done();
         });
 
